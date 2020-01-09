@@ -1,0 +1,2 @@
+# 环境配置
+将cesium1.6.5中的Build文件夹和HelloWorld.html放入目标目录文件夹，以服务器环境运行HtlloWorld.html文件
