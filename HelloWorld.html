@@ -31,27 +31,65 @@
   <script>
     var viewer = new Cesium.Viewer('cesiumContainer', {
       // 右上角位置搜索框，用于位置搜索
-      geocoder: false,
+      // geocoder: true,
       // 右上角房屋，用于将视角返回初始位置
-      homeButton: false,
+      // homeButton: ,
       // 右上角球，用于视角模式的选择
-      sceneModePicker: false,
+      // sceneModePicker: false,
       // 右上角地图，图层选择器，选择要显示的地图服务和地形服务
-      baseLayerPicker: false,
+      // baseLayerPicker: false,
       // 右上角问号，用于显示帮助
-      navigationHelpButton: false,
+      // navigationHelpButton: false,
       // 左下角动画组件
-      animation: false,
+      // animation: false,
       // 下面这个注释解开屏幕就没有显示，了
       // creditContainer: "credit",
       // 下部时间线组件
-      timeline: false,
+      // timeline: false,
       // 右下角全屏按钮
-      fullscreenButton: false,
-      vrButton: false
+      // fullscreenButton: false,
+      // vrButton: false
     });
     // 显示帧率(右上角)
     viewer.scene.debugShowFramesPerSecond = true;
+    // 添加3D模型
+    // 创建3d数据集
+    // var tileset = new Cesium.Cesium3DTileset({
+    //   url: './TestData/Tileset/tileset.json'
+    // });
+    // viewer.scene.primitives.add(tileset)
+  
+    // viewer.scene.globe.depthTestAgainstTerrain = true;
+    // var viewModel = {
+    //   height: 0
+    // };
+    // Cesium.knockout.track(viewModel);
+    // 创建数据集
+    var tileset = new Cesium.Cesium3DTileset({
+      url: './TestData/Tileset/tileset.json'
+    });
+    // 加载完成后的回调函数
+    tileset.readyPromise.then(function (tileset) {
+      // 如果数据加载成功就放入到场景中
+      viewer.scene.primitives.add(tileset);
+      // 设置场景的视图(相机)
+      // viewer.zoomTo(tileset, new Cesium.HeadingPitchRange(0.0, -0.5, tileset.boundingSphere.radius * 2.0));
+      viewer.zoomTo(tileset);
+    }).otherwise(function (error) {
+      console.log(error);
+    });
+
+    // Cesium.knockout.getObservable(viewModel, 'height').subscribe(function (height) {
+    //   height = Number(height);
+    //   if (isNaN(height)) {
+    //     return;
+    //   }
+    //   var cartographic = Cesium.Cartographic.fromCartesian(tileset.boundingSphere.center);
+    //   var surface = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, 0.0);
+    //   var offset = Cesium.Cartesian3.fromRadians(cartographic.longitude, cartographic.latitude, height);
+    //   var translation = Cesium.Cartesian3.subtract(offset, surface, new Cesium.Cartesian3());
+    //   tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation);
+    // });
   </script>
 </body>
 
