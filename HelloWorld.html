@@ -1,25 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Use correct character set. -->
   <meta charset="utf-8">
   <!-- Tell IE to use the latest, best version. -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <title>Hello World!</title>
   <script src="../Build/Cesium/Cesium.js"></script>
   <style>
-      @import url(../Build/Cesium/Widgets/widgets.css);
-      html, body, #cesiumContainer {
-          width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden;
-      }
+    @import url(../Build/Cesium/Widgets/widgets.css);
+
+    html,
+    body,
+    #cesiumContainer {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
   </style>
 </head>
+
 <body>
   <div id="cesiumContainer"></div>
   <script>
-    var viewer = new Cesium.Viewer('cesiumContainer');
+    var viewer = new Cesium.Viewer('cesiumContainer', {
+      // 右上角位置搜索框，用于位置搜索
+      geocoder: false,
+      // 右上角房屋，用于将视角返回初始位置
+      homeButton: false,
+      // 右上角球，用于视角模式的选择
+      sceneModePicker: false,
+      // 右上角地图，图层选择器，选择要显示的地图服务和地形服务
+      baseLayerPicker: false,
+      // 右上角问号，用于显示帮助
+      navigationHelpButton: false,
+      // 左下角动画组件
+      animation: false,
+      // 下面这个注释解开屏幕就没有显示，了
+      // creditContainer: "credit",
+      // 下部时间线组件
+      timeline: false,
+      // 右下角全屏按钮
+      fullscreenButton: false,
+      vrButton: false
+    });
+    // 显示帧率(右上角)
+    viewer.scene.debugShowFramesPerSecond = true;
   </script>
 </body>
+
 </html>
